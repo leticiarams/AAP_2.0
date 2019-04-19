@@ -1,0 +1,44 @@
+<head>
+    <script>
+        function openCadNew (id_curso=""){
+            if (id_curso === ""){
+                window.location.href = "/cad_curso_edt";
+            }else{
+                window.location.href = "/cad_curso_edt?id_curso="+id_curso;
+            }
+        }
+    </script>
+</head>
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{# Display a form #}
+{% buttons %}
+    <button type="button" class="btn btn-primary" onclick="openCadNew();">
+      {% bootstrap_icon "plus" %} Novo
+    </button>
+  {% endbuttons %}
+<table class="table">
+    <thead>
+        <th scope="col">Descrição</th>
+        <th scope="col">{% bootstrap_icon "edit" %}</th>
+    </thead>
+    <tbody>
+
+    {%for oCurso in list_curso %}
+        <tr>
+          <th scope="row">{{oCurso.nome_curso}}</th>
+          <td style="cursor:pointer;" onclick="openCadNew('{{oCurso.id_curso}}');">{% bootstrap_icon "edit" %}</td>
+        </tr>
+    {%endfor%}
+    </tbody>
+</table>
+
+{# Read the documentation for more information #}

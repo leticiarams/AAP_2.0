@@ -1,0 +1,30 @@
+{% block messages %}
+    {% if msg %}<div>{{ msg }}</div>{% endif %}
+    {%
+        for i in list_cursos:
+            print i
+    %}
+{% endblock %}
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{# Display a form #}
+<form action="/cad_curso_edt" method="post" class="form">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <input type="hidden" value="{{form.id_curso}}">
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      {% bootstrap_icon "star" %} Confirmar
+    </button>
+  {% endbuttons %}
+</form>
+
+{# Read the documentation for more information #}
